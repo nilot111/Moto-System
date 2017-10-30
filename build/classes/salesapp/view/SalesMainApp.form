@@ -57,7 +57,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="551" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="570" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -80,7 +80,7 @@
                           <Component id="jScrollPane1" pref="529" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -88,22 +88,20 @@
                                               <Component id="textNombres" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                              <Component id="textMat" pref="242" max="32767" attributes="0"/>
+                                              <Component id="bDelCliente" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                                              <Component id="bUpdCliente" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace pref="39" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="bDelCliente" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jLabel5" max="32767" attributes="0"/>
+                                                  <Component id="jLabel3" max="32767" attributes="0"/>
                                               </Group>
-                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                              <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                                                      <Component id="bUpdCliente" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="textDir" pref="242" max="32767" attributes="0"/>
+                                                  <Component id="textMat" alignment="0" pref="242" max="32767" attributes="0"/>
+                                                  <Component id="textDir" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -186,9 +184,9 @@
                           <Component id="bDelCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bUpdCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="358" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="343" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -314,12 +312,12 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                      <Component id="textPat1" max="32767" attributes="0"/>
+                                      <Component id="textModel" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="textNombres1" max="32767" attributes="0"/>
+                                      <Component id="textProd" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -339,8 +337,8 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jComboBox1" max="32767" attributes="0"/>
-                                                  <Component id="textDir1" pref="215" max="32767" attributes="0"/>
+                                                  <Component id="comboTipo" max="32767" attributes="0"/>
+                                                  <Component id="textColor" pref="215" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -356,9 +354,9 @@
                                       </Group>
                                       <EmptySpace type="unrelated" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="textCel1" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                                          <Component id="textDni1" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                                          <Component id="textCel2" min="-2" pref="103" max="-2" attributes="0"/>
+                                          <Component id="textPrecContado" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                                          <Component id="textPrecLista" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                                          <Component id="textStock" min="-2" pref="103" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="bAddMoto" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -372,19 +370,19 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textNombres1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textDni1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textPrecLista" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textCel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="textPat1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="textPrecContado" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="textModel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -397,17 +395,17 @@
                                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="comboTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                                  <Component id="textDir1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textColor" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="textCel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="textStock" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -415,9 +413,9 @@
                           <Component id="bDelMoto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bUpdMoto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="358" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="346" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -458,15 +456,15 @@
                 <Property name="text" type="java.lang.String" value="Stock:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="textNombres1">
+            <Component class="javax.swing.JTextField" name="textProd">
             </Component>
-            <Component class="javax.swing.JTextField" name="textPat1">
+            <Component class="javax.swing.JTextField" name="textModel">
             </Component>
-            <Component class="javax.swing.JTextField" name="textDir1">
+            <Component class="javax.swing.JTextField" name="textColor">
             </Component>
-            <Component class="javax.swing.JTextField" name="textDni1">
+            <Component class="javax.swing.JTextField" name="textPrecLista">
             </Component>
-            <Component class="javax.swing.JTextField" name="textCel1">
+            <Component class="javax.swing.JTextField" name="textPrecContado">
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
               <AuxValues>
@@ -503,9 +501,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bUpdMotoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="textCel2">
+            <Component class="javax.swing.JTextField" name="textStock">
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="comboTipo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">

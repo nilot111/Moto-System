@@ -14,12 +14,13 @@ import salesapp.model.Moto;
  */
 public class MotoDB {
     private static ArrayList<Moto> motoList = new ArrayList<Moto>();
-    
+    private static int idCounter=0;
     public MotoDB(){
         
     }
     
     public static void add(Moto c) {
+        c.setId(idCounter++);
         motoList.add(c);
     }
     

@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import salesapp.controller.ClienteDB;
+import salesapp.controller.MotoDB;
 import salesapp.model.Cliente;
+import salesapp.model.Moto;
 
 /**
  *
@@ -25,14 +27,36 @@ public class SalesMainApp extends javax.swing.JFrame {
      * Creates new form SalesMainApp
      */
     MyTableModelClient clientModel;
+    MyTableModelMoto motoModel;
     public String dniSelected="";
-    
+    public int idMotoselected;
     public SalesMainApp() {
-        ArrayList<Cliente> clientes= ClienteDB.queryAll();
         initComponents();
+        
+        
+        Cliente c= new Cliente();
+        c.setNombres("Bianca");
+        c.setApellidoPat("Guerra");
+        c.setApellidoMat("Gongora");
+        c.setDireccion("Jesus maría");
+        c.setDni("73951963");
+        c.setCelular(Integer.parseInt("999999999"));
+        c.setEstadoCivil("Soltero");
+        
+        ClienteDB.add(c); 
+        
+        Moto m= new Moto();
+        m.setColor("rojo");
+        m.setProducto("torito 4t");
+        m.setModelo("estandar");
+        m.setTipo("motocarros");
+        m.setPrecioLista(8000);
+        m.setPrecioContado(7850);
+        m.setStock(10);
+        
+        MotoDB.add(m);  
+        
         initComponents2();
-        
-        
     }
 
     /**
@@ -42,6 +66,7 @@ public class SalesMainApp extends javax.swing.JFrame {
      */
     
     private void initComponents2(){
+        // modelo para clientes
         clientModel= new MyTableModelClient();
         tableClientes.setModel(clientModel);
         tableClientes.addMouseListener(new MouseAdapter() {		
@@ -57,7 +82,26 @@ public class SalesMainApp extends javax.swing.JFrame {
                 textCel.setText(tableClientes.getValueAt(selRow, 5).toString());
                 comboEstado.setSelectedItem(tableClientes.getValueAt(selRow, 6).toString());                
             }
-        });		        
+        });
+        
+        // modelo para motos
+        motoModel= new MyTableModelMoto();
+        tableMotos.setModel(motoModel);
+        tableMotos.addMouseListener(new MouseAdapter() {		
+            @Override
+            public void mouseClicked(MouseEvent e){
+                int selRow = tableMotos.getSelectedRow();
+                 
+                idMotoselected=Integer.parseInt(tableMotos.getValueAt(selRow, 0).toString());
+                textProd.setText(tableMotos.getValueAt(selRow, 1).toString());
+                textModel.setText(tableMotos.getValueAt(selRow, 2).toString());
+                comboTipo.setSelectedItem(tableMotos.getValueAt(selRow, 3).toString());  
+                textColor.setText(tableMotos.getValueAt(selRow, 4).toString());
+                textPrecLista.setText(tableMotos.getValueAt(selRow, 5).toString());
+                textPrecContado.setText(tableMotos.getValueAt(selRow, 6).toString());
+                textStock.setText(tableMotos.getValueAt(selRow, 7).toString());              
+            }
+        });        
     }
     
     public void refreshTblClient(){
@@ -65,6 +109,12 @@ public class SalesMainApp extends javax.swing.JFrame {
 	clientModel.fireTableChanged(null);
 
     }
+    
+    public void refreshTblMoto(){
+	motoModel.MotoLst = MotoDB.queryAll();
+	motoModel.fireTableChanged(null);
+
+    }    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,18 +149,18 @@ public class SalesMainApp extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        textNombres1 = new javax.swing.JTextField();
-        textPat1 = new javax.swing.JTextField();
-        textDir1 = new javax.swing.JTextField();
-        textDni1 = new javax.swing.JTextField();
-        textCel1 = new javax.swing.JTextField();
+        textProd = new javax.swing.JTextField();
+        textModel = new javax.swing.JTextField();
+        textColor = new javax.swing.JTextField();
+        textPrecLista = new javax.swing.JTextField();
+        textPrecContado = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMotos = new javax.swing.JTable();
         bAddMoto = new javax.swing.JButton();
         bDelMoto = new javax.swing.JButton();
         bUpdMoto = new javax.swing.JButton();
-        textCel2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        textStock = new javax.swing.JTextField();
+        comboTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,7 +174,7 @@ public class SalesMainApp extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 551, Short.MAX_VALUE)
+            .addGap(0, 570, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Venta", jPanel1);
@@ -185,19 +235,18 @@ public class SalesMainApp extends javax.swing.JFrame {
                                         .addGap(50, 50, 50)
                                         .addComponent(textNombres))
                                     .addGroup(jPanelClienteLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(15, 15, 15)
-                                        .addComponent(textMat, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                                        .addComponent(bDelCliente)
+                                        .addGap(158, 158, 158)
+                                        .addComponent(bUpdCliente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
                                     .addGroup(jPanelClienteLayout.createSequentialGroup()
+                                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(15, 15, 15)
                                         .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(bDelCliente))
-                                        .addGap(30, 30, 30)
-                                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanelClienteLayout.createSequentialGroup()
-                                                .addGap(128, 128, 128)
-                                                .addComponent(bUpdCliente))
-                                            .addComponent(textDir, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))))
+                                            .addComponent(textMat, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                                            .addComponent(textDir))))
                                 .addGap(18, 18, 18))
                             .addGroup(jPanelClienteLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -255,9 +304,9 @@ public class SalesMainApp extends javax.swing.JFrame {
                     .addComponent(bAddCliente)
                     .addComponent(bDelCliente)
                     .addComponent(bUpdCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         jTabbedPane1.addTab("Clientes", jPanelCliente);
@@ -299,7 +348,7 @@ public class SalesMainApp extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Moto carros", "4 ruedas", "Motocicletas" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Moto carros", "4 ruedas", "Motocicletas" }));
 
         javax.swing.GroupLayout jPanelMotoLayout = new javax.swing.GroupLayout(jPanelMoto);
         jPanelMoto.setLayout(jPanelMotoLayout);
@@ -314,11 +363,11 @@ public class SalesMainApp extends javax.swing.JFrame {
                             .addGroup(jPanelMotoLayout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(58, 58, 58)
-                                .addComponent(textPat1))
+                                .addComponent(textModel))
                             .addGroup(jPanelMotoLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(50, 50, 50)
-                                .addComponent(textNombres1))
+                                .addComponent(textProd))
                             .addGroup(jPanelMotoLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(0, 0, Short.MAX_VALUE))
@@ -334,8 +383,8 @@ public class SalesMainApp extends javax.swing.JFrame {
                                     .addGroup(jPanelMotoLayout.createSequentialGroup()
                                         .addGap(28, 28, 28)
                                         .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(textDir1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))))))
+                                            .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(textColor, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelMotoLayout.createSequentialGroup()
@@ -345,27 +394,27 @@ public class SalesMainApp extends javax.swing.JFrame {
                                     .addComponent(jLabel14))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textCel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textDni1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textCel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(textPrecContado, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textPrecLista, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textStock, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(bAddMoto, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(42, 42, 42))
         );
         jPanelMotoLayout.setVerticalGroup(
             jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMotoLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(24, 24, 24)
                 .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel11)
-                    .addComponent(textNombres1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textDni1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textPrecLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
-                        .addComponent(textCel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(textPat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textPrecContado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,20 +425,20 @@ public class SalesMainApp extends javax.swing.JFrame {
                                 .addGap(3, 3, 3)
                                 .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel10)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
-                            .addComponent(textDir1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(textCel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(textStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bAddMoto)
                     .addComponent(bDelMoto)
                     .addComponent(bUpdMoto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         jTabbedPane1.addTab("Motos", jPanelMoto);
@@ -469,14 +518,64 @@ public class SalesMainApp extends javax.swing.JFrame {
 
     private void bAddMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddMotoActionPerformed
         // TODO add your handling code here:
+        
+        //Obteniendo Data de la moto
+        
+        String prod=textProd.getText();
+        String model=textModel.getText();
+        String tipo=comboTipo.getSelectedItem().toString();  
+        String color=textColor.getText();
+        double precLista=Double.parseDouble(textPrecLista.getText());
+        double precConta=Double.parseDouble(textPrecContado.getText());
+        int stock=Integer.parseInt(textStock.getText());
+        
+        Moto m= new Moto();
+        m.setColor(color);
+        m.setProducto(prod);
+        m.setModelo(model);
+        m.setTipo(tipo);
+        m.setPrecioLista(precLista);
+        m.setPrecioContado(precConta);
+        m.setStock(stock);
+        
+        MotoDB.add(m);
+        refreshTblMoto();
     }//GEN-LAST:event_bAddMotoActionPerformed
 
     private void bDelMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDelMotoActionPerformed
         // TODO add your handling code here:
+        int res = JOptionPane.showConfirmDialog(jPanelMoto, "¿Está seguro?");
+        if (res == JOptionPane.OK_OPTION) {
+                MotoDB.delete(idMotoselected);			
+                refreshTblMoto();
+        }         
     }//GEN-LAST:event_bDelMotoActionPerformed
 
     private void bUpdMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUpdMotoActionPerformed
         // TODO add your handling code here:
+        
+        //Obteniendo Data de la moto
+        int idMoto=idMotoselected;
+        String prod=textProd.getText();
+        String model=textModel.getText();
+        String tipo=comboTipo.getSelectedItem().toString();  
+        String color=textColor.getText();
+        double precLista=Double.parseDouble(textPrecLista.getText());
+        double precConta=Double.parseDouble(textPrecContado.getText());
+        int stock=Integer.parseInt(textStock.getText());        
+
+        Moto m= new Moto();
+        m.setId(idMoto);
+        m.setColor(color);
+        m.setProducto(prod);
+        m.setModelo(model);
+        m.setTipo(tipo);
+        m.setPrecioLista(precLista);
+        m.setPrecioContado(precConta);
+        m.setStock(stock);
+        
+        MotoDB.update(m);
+        refreshTblMoto();
     }//GEN-LAST:event_bUpdMotoActionPerformed
 
     /**
@@ -546,10 +645,46 @@ public class SalesMainApp extends javax.swing.JFrame {
 	
 	public String getColumnName(int col){
 		return titles[col];
-	}
-			
- }
+	}			
+    }
 
+    
+     class MyTableModelMoto extends AbstractTableModel{
+	ArrayList<Moto> MotoLst = MotoDB.queryAll();
+	String [] titles = { "Id","Producto", "Modelo", "Tipo", "Color", "Precio Lista", "Precio Contado","Stock"};
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return 8;
+	}
+
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return MotoLst.size();
+	}
+
+	@Override
+	public Object getValueAt(int row, int col) {
+		String value = "";
+		switch(col){
+			case 0:  value = "" + MotoLst.get(row).getId(); break;
+			case 1:  value = MotoLst.get(row).getProducto(); break;
+			case 2:  value = "" + MotoLst.get(row).getModelo(); break;			
+			case 3:  value= ""  + MotoLst.get(row).getTipo();break;
+			case 4: value="" + MotoLst.get(row).getColor(); break;
+			case 5: value="" + MotoLst.get(row).getPrecioLista(); break;
+                        case 6: value="" + MotoLst.get(row).getPrecioContado(); break;
+                        case 7: value="" + MotoLst.get(row).getStock(); break;
+		}
+		return value;
+	}
+	
+	public String getColumnName(int col){
+		return titles[col];
+	}			
+    }     
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAddCliente;
     private javax.swing.JButton bAddMoto;
@@ -558,7 +693,7 @@ public class SalesMainApp extends javax.swing.JFrame {
     private javax.swing.JButton bUpdCliente;
     private javax.swing.JButton bUpdMoto;
     private javax.swing.JComboBox<String> comboEstado;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -582,16 +717,16 @@ public class SalesMainApp extends javax.swing.JFrame {
     private javax.swing.JTable tableClientes;
     private javax.swing.JTable tableMotos;
     private javax.swing.JTextField textCel;
-    private javax.swing.JTextField textCel1;
-    private javax.swing.JTextField textCel2;
+    private javax.swing.JTextField textColor;
     private javax.swing.JTextField textDir;
-    private javax.swing.JTextField textDir1;
     private javax.swing.JTextField textDni;
-    private javax.swing.JTextField textDni1;
     private javax.swing.JTextField textMat;
+    private javax.swing.JTextField textModel;
     private javax.swing.JTextField textNombres;
-    private javax.swing.JTextField textNombres1;
     private javax.swing.JTextField textPat;
-    private javax.swing.JTextField textPat1;
+    private javax.swing.JTextField textPrecContado;
+    private javax.swing.JTextField textPrecLista;
+    private javax.swing.JTextField textProd;
+    private javax.swing.JTextField textStock;
     // End of variables declaration//GEN-END:variables
 }
