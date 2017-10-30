@@ -13,29 +13,29 @@ import salesapp.model.Cliente;
  * @author GUERRA
  */
 public class ClienteDB {
-    private ArrayList<Cliente> clientes = new ArrayList<>();
+    private static ArrayList<Cliente> clientes = new ArrayList<>();
     
     public ClienteDB(){
         
     }
     
-    public void add(Cliente c) {
+    public static void add(Cliente c) {
         clientes.add(c);
     }
     
-    public void update(Cliente c){
+    public static void update(Cliente c){
         for (int i = 0; i < clientes.size(); i++){
-            if (clientes.get(i).getId() == c.getId()){
+            if (clientes.get(i).getDni().equals(c.getDni())){
                 clientes.set(i,c);
                 return;
             }
         }        
     }
     
-    public void delete(int idCliente) {
+    public static void delete(String dniCliente) {
 
         for (int i = 0; i < clientes.size(); i++){
-            if (clientes.get(i).getId() == idCliente) {
+            if (clientes.get(i).getDni().equals(dniCliente)) {
                 clientes.remove(i);
                 return;
             }
@@ -43,14 +43,14 @@ public class ClienteDB {
        
     }
     
-    public ArrayList<Cliente> queryAll(){
+    public static ArrayList<Cliente> queryAll(){
         return clientes;
     }
 
-    public Cliente queryById(int clienteId) {
+    public static Cliente queryByDni(String dni) {
 
     	for (int i = 0; i < clientes.size(); i++){
-            if (clientes.get(i).getId() == clienteId) {
+            if (clientes.get(i).getDni().equals(dni)) {
                 return clientes.get(i);
             }
         }

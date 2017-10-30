@@ -13,5 +13,48 @@ import salesapp.model.Moto;
  * @author GUERRA
  */
 public class MotoDB {
-    private ArrayList<Moto> motoList = new ArrayList<Moto>();
+    private static ArrayList<Moto> motoList = new ArrayList<Moto>();
+    
+    public MotoDB(){
+        
+    }
+    
+    public static void add(Moto c) {
+        motoList.add(c);
+    }
+    
+    public static void update(Moto c){
+        for (int i = 0; i < motoList.size(); i++){
+            if (motoList.get(i).getId()==c.getId()){
+                motoList.set(i,c);
+                return;
+            }
+        }        
+    }
+    
+    public static void delete(int id) {
+
+        for (int i = 0; i < motoList.size(); i++){
+            if (motoList.get(i).getId()==id){
+                motoList.remove(i);
+                return;
+            }
+        }
+       
+    }
+    
+    public static ArrayList<Moto> queryAll(){
+        return motoList;
+    }
+
+    public static Moto queryById(int id) {
+
+    	for (int i = 0; i < motoList.size(); i++){
+            if (motoList.get(i).getId()==id){
+                return motoList.get(i);
+            }
+        }
+        return null;
+
+    }        
 }
