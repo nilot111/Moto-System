@@ -57,5 +57,14 @@ public class MotoDB {
         }
         return null;
 
-    }        
+    }
+    
+    public static void vender(int id){
+    	for (int i = 0; i < motoList.size(); i++){
+            if (motoList.get(i).getId()==id){
+                motoList.get(i).setStock(motoList.get(i).getStock()-1);
+                break;
+            }
+        }        
+    }
 }

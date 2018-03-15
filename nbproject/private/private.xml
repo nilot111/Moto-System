@@ -4,10 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/model/Moto.java</file>
-            <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/controller/IngresoDB.java</file>
             <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/view/SalesMainApp.java</file>
+            <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/model/Venta.java</file>
+            <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/controller/VentaDB.java</file>
             <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/controller/MotoDB.java</file>
-            <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/model/IngresoMoto.java</file>
             <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/controller/ClienteDB.java</file>
             <file>file:/C:/Users/GUERRA/Desktop/SISTEMA%20MOTOS/SalesApp/src/salesapp/model/Cliente.java</file>
         </group>

@@ -13,5 +13,18 @@ import salesapp.model.Venta;
  * @author GUERRA
  */
 public class VentaDB {
-    private ArrayList<Venta> ventas = new ArrayList<Venta>();
+    private static ArrayList<Venta> ventas = new ArrayList<Venta>();
+    
+    public VentaDB(){
+        
+    }
+   
+    public static void add(Venta v){
+        ventas.add(v);
+    }
+    
+    public static ArrayList<Venta> queryAll(){
+        return ventas;
+    }
+    
 }

@@ -5,6 +5,8 @@
  */
 package salesapp.model;
 
+import java.util.Date;
+
 /**
  *
  * @author GUERRA
@@ -12,19 +14,21 @@ package salesapp.model;
 public class Venta {
     private int id;
     private double monto;
-    private String fecha;
+    private Date fecha;
     private Cliente cliente;
     private Moto moto;
     private String tipoVenta; // Factura, boleta, nota de credito
-    
+    private String medioPago; // Efectivo, tarjeta, transferencia
+    private String seguro; // No , 1 año, 2 años , 3 años
+    private boolean techoLona; 
+    private boolean soat;
     public Venta(){
         
     }
     
-    public Venta(int id,double monto,String fecha,Cliente cliente,Moto moto){
+    public Venta(int id,double monto,Cliente cliente,Moto moto){
         this.id=id;
         this.monto=monto;
-        this.fecha=fecha;
         this.cliente=cliente;
         this.moto=moto;
     }
@@ -60,14 +64,14 @@ public class Venta {
     /**
      * @return the fecha
      */
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -111,5 +115,61 @@ public class Venta {
      */
     public void setTipoVenta(String tipoVenta) {
         this.tipoVenta = tipoVenta;
+    }
+
+    /**
+     * @return the medioPago
+     */
+    public String getMedioPago() {
+        return medioPago;
+    }
+
+    /**
+     * @param medioPago the medioPago to set
+     */
+    public void setMedioPago(String medioPago) {
+        this.medioPago = medioPago;
+    }
+
+    /**
+     * @return the seguro
+     */
+    public String getSeguro() {
+        return seguro;
+    }
+
+    /**
+     * @param seguro the seguro to set
+     */
+    public void setSeguro(String seguro) {
+        this.seguro = seguro;
+    }
+
+    /**
+     * @return the techoLona
+     */
+    public boolean isTechoLona() {
+        return techoLona;
+    }
+
+    /**
+     * @param techoLona the techoLona to set
+     */
+    public void setTechoLona(boolean techoLona) {
+        this.techoLona = techoLona;
+    }
+
+    /**
+     * @return the soat
+     */
+    public boolean isSoat() {
+        return soat;
+    }
+
+    /**
+     * @param soat the soat to set
+     */
+    public void setSoat(boolean soat) {
+        this.soat = soat;
     }
 }

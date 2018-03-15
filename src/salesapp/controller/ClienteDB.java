@@ -5,7 +5,13 @@
  */
 package salesapp.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import salesapp.model.Cliente;
 
 /**
@@ -20,6 +26,25 @@ public class ClienteDB {
     }
     
     public static void add(Cliente c) {
+//        Connection conn=null;
+//        PreparedStatement psmt=null;
+//        
+//        try{
+//            conn=DriverManager.getConnection("jdbc:mysql://SistemaMotos:3306/mydb",
+//                    "root","root");
+//            if(conn!=null){
+//                System.out.println("connected to database");
+//            }          
+//        }catch(Exception e){
+//            System.out.println("not connected");
+//        }
+//        finally{
+//            try {
+//                conn.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(ClienteDB.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         clientes.add(c);
     }
     
