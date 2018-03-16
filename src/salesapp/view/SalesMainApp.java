@@ -39,6 +39,7 @@ public class SalesMainApp extends javax.swing.JFrame {
     MyTableModelVenta ventaModel;
     public String dniSelected="";
     public int idMotoselected;
+    public int idCliente;
     public SalesMainApp() {
         initComponents();
         
@@ -46,29 +47,7 @@ public class SalesMainApp extends javax.swing.JFrame {
         butgroupLona.add(noLona);
         
         btngroupSoat.add(siSoat);
-        btngroupSoat.add(noSoat);
-        
-        Cliente c= new Cliente();
-        c.setNombres("Bianca");
-        c.setApellidoPat("Guerra");
-        c.setApellidoMat("Gongora");
-        c.setDireccion("Jesus maría");
-        c.setDni("73951963");
-        c.setCelular(Integer.parseInt("999999999"));
-        c.setEstadoCivil("Soltero");
-        
-        ClienteDB.add(c); 
-        
-        Moto m= new Moto();
-        m.setColor("rojo");
-        m.setProducto("torito 4t");
-        m.setModelo("estandar");
-        m.setTipo("motocarros");
-        m.setPrecioLista(8000);
-        m.setPrecioContado(7850);
-        m.setStock(10);
-        
-        MotoDB.add(m);  
+        btngroupSoat.add(noSoat);  
         
         
         initComponents2();
@@ -88,14 +67,16 @@ public class SalesMainApp extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e){
                 int selRow = tableClientes.getSelectedRow();
-                dniSelected = tableClientes.getValueAt(selRow, 3).toString();  
-                textNombres.setText(tableClientes.getValueAt(selRow, 0).toString());
-                textPat.setText(tableClientes.getValueAt(selRow, 1).toString());
-                textMat.setText(tableClientes.getValueAt(selRow, 2).toString());
-                textDir.setText(tableClientes.getValueAt(selRow, 4).toString());
-                textDni.setText(tableClientes.getValueAt(selRow, 3).toString());
-                textCel.setText(tableClientes.getValueAt(selRow, 5).toString());
-                comboEstado.setSelectedItem(tableClientes.getValueAt(selRow, 6).toString());                
+                idCliente=Integer.parseInt(table_clientes.getValueAt(selRow, 0).toString());
+                  
+                textNombres.setText(tableClientes.getValueAt(selRow, 1).toString());
+                textPat.setText(tableClientes.getValueAt(selRow, 2).toString());
+                textMat.setText(tableClientes.getValueAt(selRow, 3).toString());
+                dniSelected = tableClientes.getValueAt(selRow, 4).toString();                
+                textDir.setText(tableClientes.getValueAt(selRow, 5).toString());
+                textDni.setText(tableClientes.getValueAt(selRow, 4).toString());
+                textCel.setText(tableClientes.getValueAt(selRow, 6).toString());
+                comboEstado.setSelectedItem(tableClientes.getValueAt(selRow, 7).toString());                
             }
         });
         
@@ -128,8 +109,9 @@ public class SalesMainApp extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e){
                 int selRow = table_clientes.getSelectedRow();
-                txtdni.setText(table_clientes.getValueAt(selRow, 3).toString());  
-                txtcliente.setText(table_clientes.getValueAt(selRow, 0).toString());
+                idCliente=Integer.parseInt(table_clientes.getValueAt(selRow, 0).toString());
+                txtdni.setText(table_clientes.getValueAt(selRow, 4).toString());  
+                txtcliente.setText(table_clientes.getValueAt(selRow, 1).toString());
             }
         });    
         
@@ -1005,6 +987,7 @@ public class SalesMainApp extends javax.swing.JFrame {
         String estado= comboEstado.getSelectedItem().toString();
         
         Cliente c= new Cliente();
+        c.setId(idCliente);
         c.setNombres(nombres);
         c.setApellidoPat(apePat);
         c.setApellidoMat(apeMat);
@@ -1102,7 +1085,7 @@ public class SalesMainApp extends javax.swing.JFrame {
         
         Venta venta= new Venta();
         
-        Cliente c= ClienteDB.queryByDni(txtdni.getText());
+        Cliente c= ClienteDB.queryByid(idCliente);
         venta.setCliente(c);
         
         Moto m=MotoDB.queryById(Integer.parseInt(txtcodigo.getText()));
@@ -1162,11 +1145,11 @@ public class SalesMainApp extends javax.swing.JFrame {
     
      class MyTableModelClient extends AbstractTableModel{
 	ArrayList<Cliente> ClientLst = ClienteDB.queryAll();
-	String [] titles = { "Nombres", "Apellido paterno", "Apellido materno", "DNI", "Dirección", "Celular","Estado Civil"};
+	String [] titles = {"Id", "Nombres", "Apellido paterno", "Apellido materno", "DNI", "Dirección", "Celular","Estado Civil"};
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 7;
+		return 8;
 	}
 
 	@Override
@@ -1179,13 +1162,14 @@ public class SalesMainApp extends javax.swing.JFrame {
 	public Object getValueAt(int row, int col) {
 		String value = "";
 		switch(col){
-			case 0:  value = "" + ClientLst.get(row).getNombres(); break;
-			case 1:  value = ClientLst.get(row).getApellidoPat(); break;
-			case 2:  value = "" + ClientLst.get(row).getApellidoMat(); break;			
-			case 3:  value= ""  + ClientLst.get(row).getDni();break;
-			case 4: value="" + ClientLst.get(row).getDireccion(); break;
-			case 5: value="" + ClientLst.get(row).getCelular(); break;
-                        case 6: value="" + ClientLst.get(row).getEstadoCivil(); break;
+                        case 0:  value = "" + ClientLst.get(row).getId(); break;
+			case 1:  value = "" + ClientLst.get(row).getNombres(); break;
+			case 2:  value = ClientLst.get(row).getApellidoPat(); break;
+			case 3:  value = "" + ClientLst.get(row).getApellidoMat(); break;			
+			case 4:  value= ""  + ClientLst.get(row).getDni();break;
+			case 5: value="" + ClientLst.get(row).getDireccion(); break;
+			case 6: value="" + ClientLst.get(row).getCelular(); break;
+                        case 7: value="" + ClientLst.get(row).getEstadoCivil(); break;
 		}
 		return value;
 	}
