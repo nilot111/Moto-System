@@ -10,10 +10,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -76,7 +79,14 @@ public class SalesMainApp extends javax.swing.JFrame {
                 textDir.setText(tableClientes.getValueAt(selRow, 5).toString());
                 textDni.setText(tableClientes.getValueAt(selRow, 4).toString());
                 textCel.setText(tableClientes.getValueAt(selRow, 6).toString());
-                comboEstado.setSelectedItem(tableClientes.getValueAt(selRow, 7).toString());                
+                comboEstado.setSelectedItem(tableClientes.getValueAt(selRow, 7).toString());
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                try {
+                    fechaNacimiento.setDate(formatter.parse(tableClientes.getValueAt(selRow, 8).toString()));
+                    //fechaNacimiento.setDate( SimpleDateFormat.parse(tableClientes.getValueAt(selRow, 8).toString()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(SalesMainApp.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
@@ -180,7 +190,16 @@ public class SalesMainApp extends javax.swing.JFrame {
             }
         };
         siSoat.addChangeListener(changeSoat);
-        noSoat.addChangeListener(changeSoat);        
+        noSoat.addChangeListener(changeSoat);
+        
+        // inicializamos fecha de nacimiento 
+         SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            fechaNacimiento.setDate(df.parse("03.06.1994"));
+            //fechaNacimiento.setDate( SimpleDateFormat.parse(tableClientes.getValueAt(selRow, 8).toString()));
+        } catch (ParseException ex) {
+            Logger.getLogger(SalesMainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void refreshMontoTotal(){
@@ -274,6 +293,8 @@ public class SalesMainApp extends javax.swing.JFrame {
         bAddCliente = new javax.swing.JButton();
         bDelCliente = new javax.swing.JButton();
         bUpdCliente = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        fechaNacimiento = new org.jdesktop.swingx.JXDatePicker();
         jPanelMoto = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -384,57 +405,60 @@ public class SalesMainApp extends javax.swing.JFrame {
             }
         });
 
+        jLabel31.setText("Fecha Nacimiento:");
+
         javax.swing.GroupLayout jPanelClienteLayout = new javax.swing.GroupLayout(jPanelCliente);
         jPanelCliente.setLayout(jPanelClienteLayout);
         jPanelClienteLayout.setHorizontalGroup(
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createSequentialGroup()
+            .addGroup(jPanelClienteLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelClienteLayout.createSequentialGroup()
+                        .addComponent(bDelCliente)
+                        .addGap(158, 158, 158)
+                        .addComponent(bUpdCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bAddCliente))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
                     .addGroup(jPanelClienteLayout.createSequentialGroup()
                         .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelClienteLayout.createSequentialGroup()
-                                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelClienteLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(54, 54, 54)
-                                        .addComponent(textNombres))
-                                    .addGroup(jPanelClienteLayout.createSequentialGroup()
-                                        .addComponent(bDelCliente)
-                                        .addGap(158, 158, 158)
-                                        .addComponent(bUpdCliente)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE))
-                                    .addGroup(jPanelClienteLayout.createSequentialGroup()
-                                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(15, 15, 15)
-                                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(textMat, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                                            .addComponent(textDir))))
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanelClienteLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(textPat, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                                .addGap(17, 17, 17)))
+                                .addComponent(textPat))
+                            .addGroup(jPanelClienteLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(54, 54, 54)
+                                .addComponent(textNombres))
+                            .addGroup(jPanelClienteLayout.createSequentialGroup()
+                                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(15, 15, 15)
+                                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textMat, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                                    .addComponent(textDir))))
+                        .addGap(28, 28, 28)
                         .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelClienteLayout.createSequentialGroup()
+                                .addComponent(jLabel31)
+                                .addGap(11, 11, 11))
                             .addGroup(jPanelClienteLayout.createSequentialGroup()
                                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel7)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelClienteLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(textCel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(textDni, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(comboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(bAddCliente, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(42, 42, 42))
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanelClienteLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textCel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textDni, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(29, 29, 29))
         );
         jPanelClienteLayout.setVerticalGroup(
             jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,12 +471,11 @@ public class SalesMainApp extends javax.swing.JFrame {
                     .addComponent(textDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(textCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(textPat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textPat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -464,13 +487,15 @@ public class SalesMainApp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textDir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel31)
+                    .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bAddCliente)
                     .addComponent(bDelCliente)
                     .addComponent(bUpdCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
@@ -949,6 +974,8 @@ public class SalesMainApp extends javax.swing.JFrame {
         String dni = textDni.getText();
         String cel= textCel.getText();
         String estado= comboEstado.getSelectedItem().toString();
+        Date fechNac= convertUtilToSql(fechaNacimiento.getDate());
+        Date fechRegistro = convertUtilToSql(Calendar.getInstance().getTime());
         
         Cliente c= new Cliente();
         c.setNombres(nombres);
@@ -958,11 +985,14 @@ public class SalesMainApp extends javax.swing.JFrame {
         c.setDni(dni);
         c.setCelular(Integer.parseInt(cel));
         c.setEstadoCivil(estado);
+        c.setFechaNacimiento(convertUtilToSql(fechNac));
+        c.setFechaRegistro(fechRegistro);
         
         ClienteDB.add(c);
         refreshTblClient();
         limpiarFormCliente();
     }//GEN-LAST:event_bAddClienteActionPerformed
+
 
     private void bDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDelClienteActionPerformed
         // TODO add your handling code here:
@@ -985,6 +1015,7 @@ public class SalesMainApp extends javax.swing.JFrame {
         String dni = textDni.getText();
         String cel= textCel.getText();
         String estado= comboEstado.getSelectedItem().toString();
+        Date fechNac= convertUtilToSql(fechaNacimiento.getDate());
         
         Cliente c= new Cliente();
         c.setId(idCliente);
@@ -995,6 +1026,7 @@ public class SalesMainApp extends javax.swing.JFrame {
         c.setDni(dni);
         c.setCelular(Integer.parseInt(cel));
         c.setEstadoCivil(estado);
+        c.setFechaNacimiento(fechNac);
         
         ClienteDB.update(c);
         refreshTblClient();
@@ -1078,7 +1110,7 @@ public class SalesMainApp extends javax.swing.JFrame {
     private void btnGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarVentaActionPerformed
         // TODO add your handling code here:
         
-        Date d = Calendar.getInstance().getTime(); // Current time
+        Date d = convertUtilToSql(Calendar.getInstance().getTime()); // Current time
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); // Set your date format
 //        String currentData = sdf.format(d); // Get Date String according to date format
         // Recolectamos todos los datos
@@ -1098,11 +1130,11 @@ public class SalesMainApp extends javax.swing.JFrame {
         venta.setMonto(Double.parseDouble(monto_total.getText()));
         venta.setFecha(d);
         VentaDB.add(venta);
-        
+        MotoDB.vender(m); //actualizamos stock
         JOptionPane.showMessageDialog(jVenta, "Se realizó con éxito la venta","Venta Confirmada",
                 JOptionPane.OK_OPTION);
         
-        MotoDB.vender(Integer.parseInt(txtcodigo.getText())); //actualizamos stock
+        
         refreshTblMoto();
         refreshTblVenta(); // actualizamos la tabla de ventas
         limpiarFormVenta();
@@ -1145,11 +1177,11 @@ public class SalesMainApp extends javax.swing.JFrame {
     
      class MyTableModelClient extends AbstractTableModel{
 	ArrayList<Cliente> ClientLst = ClienteDB.queryAll();
-	String [] titles = {"Id", "Nombres", "Apellido paterno", "Apellido materno", "DNI", "Dirección", "Celular","Estado Civil"};
+	String [] titles = {"Id", "Nombres", "Apellido paterno", "Apellido materno", "DNI", "Dirección", "Celular","Estado Civil","Fecha Nacimiento"};
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 8;
+		return 9;
 	}
 
 	@Override
@@ -1170,6 +1202,7 @@ public class SalesMainApp extends javax.swing.JFrame {
 			case 5: value="" + ClientLst.get(row).getDireccion(); break;
 			case 6: value="" + ClientLst.get(row).getCelular(); break;
                         case 7: value="" + ClientLst.get(row).getEstadoCivil(); break;
+                        case 8: value="" + ClientLst.get(row).getFechaNacimiento(); break;
 		}
 		return value;
 	}
@@ -1251,6 +1284,13 @@ public class SalesMainApp extends javax.swing.JFrame {
 	}
       }     
      
+    private static java.sql.Date convertUtilToSql(java.util.Date uDate) {
+
+        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+
+        return sDate;
+
+    }     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAddCliente;
     private javax.swing.JButton bAddMoto;
@@ -1263,6 +1303,7 @@ public class SalesMainApp extends javax.swing.JFrame {
     private javax.swing.ButtonGroup butgroupLona;
     private javax.swing.JComboBox<String> comboEstado;
     private javax.swing.JComboBox<String> comboTipo;
+    private org.jdesktop.swingx.JXDatePicker fechaNacimiento;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jHistorial;
     private javax.swing.JLabel jLabel1;
@@ -1289,6 +1330,7 @@ public class SalesMainApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

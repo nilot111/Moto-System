@@ -9,6 +9,7 @@ package salesapp.controller;
 //import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,8 +42,8 @@ public class ClienteDB {
                 System.out.println("connected to database");
                 //Paso 2: Preparar la sentencia
                 String mysql = "INSERT INTO clientes "
-                                + "(nombres, apellidoPat, apellidoMat, dni,direccion,estadoCivil,celular)"
-                                + "VALUES (?,?,?,?,?,?,?)";
+                                + "(nombres, apellidoPat, apellidoMat, dni,direccion,estadoCivil,celular,fechaNacimiento,fechaRegistro)"
+                                + "VALUES (?,?,?,?,?,?,?,?,?)";
                 psmt = (PreparedStatement) conn.prepareStatement(mysql);
                 psmt.setString(1, c.getNombres());
                 psmt.setString(2, c.getApellidoPat());
@@ -51,6 +52,8 @@ public class ClienteDB {
                 psmt.setString(5, c.getDireccion());
                 psmt.setString(6, c.getEstadoCivil());
                 psmt.setInt(7, c.getCelular());
+                psmt.setDate(8, c.getFechaNacimiento());
+                psmt.setDate(9, c.getFechaRegistro());
                 //Paso 4: Ejecutar la sentencia
                 psmt.executeUpdate();                
             }          
@@ -79,7 +82,7 @@ public class ClienteDB {
                 System.out.println("connected to database");
                 //Paso 2: Preparar la sentencia
                 String mysql = "UPDATE clientes set "
-                                + "nombres = ?, apellidoPat = ?, apellidoMat = ?, dni = ?,direccion = ?,estadoCivil = ?,celular = ?"
+                                + "nombres = ?, apellidoPat = ?, apellidoMat = ?, dni = ?,direccion = ?,estadoCivil = ?,celular = ?, fechaNacimiento = ?"
                                 + " WHERE id = ?";
                 psmt = (PreparedStatement) conn.prepareStatement(mysql);
                 //pstmt.setInt(1, p.getId());
@@ -90,7 +93,8 @@ public class ClienteDB {
                 psmt.setString(5, c.getDireccion());
                 psmt.setString(6, c.getEstadoCivil());
                 psmt.setInt(7, c.getCelular());
-                psmt.setInt(8, c.getId());
+                psmt.setDate(8, c.getFechaNacimiento());
+                psmt.setInt(9, c.getId());
                 //Paso 4: Ejecutar la sentencia
                 psmt.executeUpdate();                
             }          
@@ -164,6 +168,8 @@ public class ClienteDB {
                         c.setDireccion(rs.getString("direccion"));
                         c.setEstadoCivil(rs.getString("estadoCivil"));
                         c.setCelular(rs.getInt("celular"));
+                        c.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                        c.setFechaRegistro(rs.getDate("fechaRegistro"));
                         arr.add(c);
                 }                
             }
@@ -207,6 +213,8 @@ public class ClienteDB {
                         c.setDireccion(rs.getString("direccion"));
                         c.setEstadoCivil(rs.getString("estadoCivil"));
                         c.setCelular(rs.getInt("celular"));
+                        c.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                        c.setFechaRegistro(rs.getDate("fechaRegistro"));                        
                         arr.add(c);
                 }                
             }

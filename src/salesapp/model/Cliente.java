@@ -5,6 +5,12 @@
  */
 package salesapp.model;
 
+import java.sql.Date;
+
+
+
+
+
 /**
  *
  * @author GUERRA
@@ -19,6 +25,8 @@ public class Cliente {
     private String estadoCivil;
     private int celular;
     private int conyugueid;
+    private Date fechaNacimiento;
+    private Date fechaRegistro;
     
     public Cliente(){
         
@@ -153,5 +161,33 @@ public class Cliente {
      */
     public void setConyugueid(int conyugueid) {
         this.conyugueid = conyugueid;
+    }
+
+    /**
+     * @return the fechaNacimiento
+     */
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    /**
+     * @param fechaNacimiento the fechaNacimiento to set
+     */
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    /**
+     * @return the fechaRegistro
+     */
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    /**
+     * @param fechaRegistro the fechaRegistro to set
+     */
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 }
