@@ -18,9 +18,12 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import salesapp.controller.ClienteDB;
 import salesapp.controller.MotoDB;
 import salesapp.controller.VentaDB;
@@ -43,6 +46,8 @@ public class SalesMainApp extends javax.swing.JFrame {
     public String dniSelected="";
     public int idMotoselected;
     public int idCliente;
+    public TableRowSorter<TableModel> sorterSaleClient;
+    public TableRowSorter<TableModel> sorterSaleMoto;
     public SalesMainApp() {
         initComponents();
         
@@ -66,6 +71,10 @@ public class SalesMainApp extends javax.swing.JFrame {
         // modelo para clientes
         clientModel= new MyTableModelClient();
         tableClientes.setModel(clientModel);
+        // Instanciamos el TableRowSorter y lo añadimos al JTable
+        TableRowSorter<TableModel> sorterClient = new TableRowSorter<>(clientModel);
+        tableClientes.setRowSorter(sorterClient); 
+
         tableClientes.addMouseListener(new MouseAdapter() {		
             @Override
             public void mouseClicked(MouseEvent e){
@@ -93,6 +102,9 @@ public class SalesMainApp extends javax.swing.JFrame {
         // modelo para motos
         motoModel= new MyTableModelMoto();
         tableMotos.setModel(motoModel);
+        // Instanciamos el TableRowSorter y lo añadimos al JTable
+        TableRowSorter<TableModel> sorterMoto = new TableRowSorter<>(motoModel);
+        tableMotos.setRowSorter(sorterMoto);         
         tableMotos.addMouseListener(new MouseAdapter() {		
             @Override
             public void mouseClicked(MouseEvent e){
@@ -111,10 +123,16 @@ public class SalesMainApp extends javax.swing.JFrame {
         
         ventaModel= new MyTableModelVenta();
         table_ventas.setModel(ventaModel);
+        // Instanciamos el TableRowSorter y lo añadimos al JTable
+        TableRowSorter<TableModel> sorterSale = new TableRowSorter<>(ventaModel);
+        table_ventas.setRowSorter(sorterSale);         
         
-        // ventas pestaña =======
+        
+        // ventas pestaña ============================
         
         table_clientes.setModel(clientModel);
+        sorterSaleClient = new TableRowSorter<>(clientModel);
+        table_clientes.setRowSorter(sorterSaleClient); 
         table_clientes.addMouseListener(new MouseAdapter() {		
             @Override
             public void mouseClicked(MouseEvent e){
@@ -129,6 +147,8 @@ public class SalesMainApp extends javax.swing.JFrame {
         
         
         table_motos.setModel(motoModel);
+        sorterSaleMoto = new TableRowSorter<>(motoModel);
+        table_motos.setRowSorter(sorterSaleMoto);  
         table_motos.addMouseListener(new MouseAdapter() {		
             @Override
             public void mouseClicked(MouseEvent e){
@@ -155,13 +175,20 @@ public class SalesMainApp extends javax.swing.JFrame {
         seguro.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e){
-                if(seguro.getSelectedItem().toString().equals("No"))
-                    prec_seguro.setText("0");
-                else if(seguro.getSelectedItem().toString().equals("1 año"))
-                    prec_seguro.setText("100");
-                else if(seguro.getSelectedItem().toString().equals("2 años"))
-                    prec_seguro.setText("200");
-                else prec_seguro.setText("300");
+                switch (seguro.getSelectedItem().toString()) {
+                    case "No":
+                        prec_seguro.setText("0");
+                        break;
+                    case "1 año":
+                        prec_seguro.setText("100");
+                        break;
+                    case "2 años":
+                        prec_seguro.setText("200");
+                        break;
+                    default:
+                        prec_seguro.setText("300");
+                        break;
+                }
                 refreshMontoTotal(); // actualizamos monto
             }
         });
@@ -681,6 +708,18 @@ public class SalesMainApp extends javax.swing.JFrame {
 
         jLabel16.setText("Nombres:");
 
+        txtdni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtdniKeyReleased(evt);
+            }
+        });
+
+        txtcliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtclienteKeyReleased(evt);
+            }
+        });
+
         jButton2.setText("Nuevo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -733,12 +772,24 @@ public class SalesMainApp extends javax.swing.JFrame {
 
         jLabel18.setText("Producto:");
 
+        txtproducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtproductoKeyReleased(evt);
+            }
+        });
+
         txtprecio.setEditable(false);
         txtprecio.setText("0");
 
         jLabel17.setText("Precio:");
 
         jLabel23.setText("Código:");
+
+        txtcodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtcodigoKeyReleased(evt);
+            }
+        });
 
         jScrollPane3.setViewportView(table_motos);
 
@@ -992,8 +1043,7 @@ public class SalesMainApp extends javax.swing.JFrame {
         refreshTblClient();
         limpiarFormCliente();
     }//GEN-LAST:event_bAddClienteActionPerformed
-
-
+    
     private void bDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDelClienteActionPerformed
         // TODO add your handling code here:
         int res = JOptionPane.showConfirmDialog(jPanelCliente, "¿Está seguro?");
@@ -1140,6 +1190,48 @@ public class SalesMainApp extends javax.swing.JFrame {
         limpiarFormVenta();
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
+    private void txtdniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdniKeyReleased
+        // TODO add your handling code here:
+        String filterdni=txtdni.getText();
+        sorterSaleClient.setRowFilter(RowFilter.regexFilter("^"+filterdni, 4));
+    }//GEN-LAST:event_txtdniKeyReleased
+
+    private void txtclienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtclienteKeyReleased
+        // TODO add your handling code here:
+        String filterNombre=upperCaseAllFirst(txtcliente.getText());
+        sorterSaleClient.setRowFilter(RowFilter.regexFilter("^"+filterNombre, 1));        
+    }//GEN-LAST:event_txtclienteKeyReleased
+
+    private void txtcodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodigoKeyReleased
+        // TODO add your handling code here:
+        String codMoto=txtcodigo.getText();
+        sorterSaleMoto.setRowFilter(RowFilter.regexFilter("^"+codMoto, 0));          
+    }//GEN-LAST:event_txtcodigoKeyReleased
+
+    private void txtproductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtproductoKeyReleased
+        // TODO add your handling code here:
+        String prodMoto=txtproducto.getText();
+        sorterSaleMoto.setRowFilter(RowFilter.regexFilter("^"+prodMoto, 1));         
+    }//GEN-LAST:event_txtproductoKeyReleased
+
+    public static String upperCaseAllFirst(String value) {
+        if( value.length()==0){
+            return "";
+        }
+        char[] array = value.toCharArray();
+        // Uppercase first letter.
+        array[0] = Character.toUpperCase(array[0]);
+
+        // Uppercase all letters that follow a whitespace character.
+        for (int i = 1; i < array.length; i++) {
+            if (Character.isWhitespace(array[i - 1])) {
+                array[i] = Character.toUpperCase(array[i]);
+            }
+        }
+
+        // Result.
+        return new String(array).replaceAll("( +)"," ").trim();
+    }
     /**
      * @param args the command line arguments
      */

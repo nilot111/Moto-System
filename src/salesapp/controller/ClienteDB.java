@@ -45,9 +45,9 @@ public class ClienteDB {
                                 + "(nombres, apellidoPat, apellidoMat, dni,direccion,estadoCivil,celular,fechaNacimiento,fechaRegistro)"
                                 + "VALUES (?,?,?,?,?,?,?,?,?)";
                 psmt = (PreparedStatement) conn.prepareStatement(mysql);
-                psmt.setString(1, c.getNombres());
-                psmt.setString(2, c.getApellidoPat());
-                psmt.setString(3, c.getApellidoMat());
+                psmt.setString(1, upperCaseAllFirst(c.getNombres()));
+                psmt.setString(2, upperCaseAllFirst(c.getApellidoPat()));
+                psmt.setString(3, upperCaseAllFirst(c.getApellidoMat()));
                 psmt.setString(4, c.getDni());
                 psmt.setString(5, c.getDireccion());
                 psmt.setString(6, c.getEstadoCivil());
@@ -70,6 +70,23 @@ public class ClienteDB {
         //clientes.add(c);
     }
     
+    public static String upperCaseAllFirst(String value) {
+
+        char[] array = value.toCharArray();
+        // Uppercase first letter.
+        array[0] = Character.toUpperCase(array[0]);
+
+        // Uppercase all letters that follow a whitespace character.
+        for (int i = 1; i < array.length; i++) {
+            if (Character.isWhitespace(array[i - 1])) {
+                array[i] = Character.toUpperCase(array[i]);
+            }
+        }
+
+        // Result.
+        return new String(array).replaceAll("( +)"," ").trim();
+    } 
+    
     public static void update(Cliente c){
         Connection conn=null;
         PreparedStatement psmt=null;
@@ -86,9 +103,9 @@ public class ClienteDB {
                                 + " WHERE id = ?";
                 psmt = (PreparedStatement) conn.prepareStatement(mysql);
                 //pstmt.setInt(1, p.getId());
-                psmt.setString(1, c.getNombres());
-                psmt.setString(2, c.getApellidoPat());
-                psmt.setString(3, c.getApellidoMat());
+                psmt.setString(1, upperCaseAllFirst(c.getNombres()));
+                psmt.setString(2, upperCaseAllFirst(c.getApellidoPat()));
+                psmt.setString(3, upperCaseAllFirst(c.getApellidoMat()));
                 psmt.setString(4, c.getDni());
                 psmt.setString(5, c.getDireccion());
                 psmt.setString(6, c.getEstadoCivil());
