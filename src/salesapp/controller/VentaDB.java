@@ -37,8 +37,8 @@ public class VentaDB {
                 System.out.println("connected to database");
                 //Paso 2: Preparar la sentencia
                 String mysql = "INSERT INTO ventas "
-                                + "(fecha, tipoVenta, medioDePago, seguro,techoLona,soat,idCliente,idMoto,monto)"
-                                + "VALUES (?,?,?,?,?,?,?,?,?)";
+                                + "(fecha, tipoVenta, medioDePago, seguro,techoLona,soat,idCliente,idMoto,monto,idIngreso)"
+                                + "VALUES (?,?,?,?,?,?,?,?,?,?)";
                 psmt = (PreparedStatement) conn.prepareStatement(mysql);
                 psmt.setDate(1, v.getFecha());
                 psmt.setString(2, v.getTipoVenta());
@@ -49,6 +49,7 @@ public class VentaDB {
                 psmt.setInt(7,v.getCliente().getId());
                 psmt.setInt(8,v.getMoto().getId());
                 psmt.setDouble(9, v.getMonto());
+                psmt.setInt(10, v.getIngreso().getId());
                 //Paso 4: Ejecutar la sentencia
                 psmt.executeUpdate();                
             }          
@@ -92,6 +93,7 @@ public class VentaDB {
                     v.setCliente(ClienteDB.queryByid(rs.getInt("idCliente")));
                     v.setMoto(MotoDB.queryById(rs.getInt("idMoto")));
                     v.setMonto(rs.getDouble("monto"));
+                    v.setIngreso(IngresoDB.queryByid(rs.getInt("idIngreso")));
                     arr.add(v);
                 }                
             }

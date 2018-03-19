@@ -5,38 +5,31 @@
  */
 package salesapp.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author GUERRA
  */
 public class IngresoMoto {
     private int id;
-    private int codMoto;
-    private String fecha;
-    private int codFactura;
+    private Date fecha;
+    private String codFactura;
     private int añoFabricacion;
     private String chasis;
     private String motor;
     private double montoFacturado;
     private int numPoliza;
     private int añoEntrada;
-    private int numItemVehiculo;
+    private int numItem;
     private String ubicacion;
-    private String placa;
-    
-    
+    private int idMotoModelo;
+    private String estado;
     
     public IngresoMoto(){
         
     }
-    
-    public IngresoMoto(int id,int codMoto,String placa,String fecha,double montFactura){
-        this.id=id;
-        this.codMoto=codMoto;
-        this.placa=placa;
-        this.montoFacturado=montFactura;
-        this.fecha=fecha;
-    }    
+
     /**
      * @return the id
      */
@@ -52,44 +45,30 @@ public class IngresoMoto {
     }
 
     /**
-     * @return the codMoto
-     */
-    public int getCodMoto() {
-        return codMoto;
-    }
-
-    /**
-     * @param codMoto the codMoto to set
-     */
-    public void setCodMoto(int codMoto) {
-        this.codMoto = codMoto;
-    }
-
-    /**
      * @return the fecha
      */
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
     /**
      * @return the codFactura
      */
-    public int getCodFactura() {
+    public String getCodFactura() {
         return codFactura;
     }
 
     /**
      * @param codFactura the codFactura to set
      */
-    public void setCodFactura(int codFactura) {
+    public void setCodFactura(String codFactura) {
         this.codFactura = codFactura;
     }
 
@@ -178,17 +157,17 @@ public class IngresoMoto {
     }
 
     /**
-     * @return the numItemVehiculo
+     * @return the numItem
      */
-    public int getNumItemVehiculo() {
-        return numItemVehiculo;
+    public int getNumItem() {
+        return numItem;
     }
 
     /**
-     * @param numItemVehiculo the numItemVehiculo to set
+     * @param numItem the numItem to set
      */
-    public void setNumItemVehiculo(int numItemVehiculo) {
-        this.numItemVehiculo = numItemVehiculo;
+    public void setNumItem(int numItem) {
+        this.numItem = numItem;
     }
 
     /**
@@ -206,16 +185,32 @@ public class IngresoMoto {
     }
 
     /**
-     * @return the placa
+     * @return the idMotoModelo
      */
-    public String getPlaca() {
-        return placa;
+    public int getIdMotoModelo() {
+        return idMotoModelo;
     }
 
     /**
-     * @param placa the placa to set
+     * @param idMotoModelo the idMotoModelo to set
      */
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setIdMotoModelo(int idMotoModelo) {
+        this.idMotoModelo = idMotoModelo;
     }
+
+    /**
+     * @return the estado
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 }

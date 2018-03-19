@@ -251,4 +251,37 @@ public class MotoDB {
                     catch (Exception e){e.printStackTrace();};
         }       
     }
+
+    public static void ingresar(Moto m){
+        Connection conn=null;
+        PreparedStatement psmt=null;
+        
+        try{
+            //Paso 1: Obtener la conexión
+            conn=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb",
+                    "root","root");
+            if(conn!=null){
+                System.out.println("connected to database");
+                //Paso 2: Preparar la sentencia
+                String mysql = "UPDATE motos set "
+                                + "stock = ?"
+                                + " WHERE id = ?";
+                psmt = (PreparedStatement) conn.prepareStatement(mysql);
+
+                psmt.setInt(1,m.getStock()+1);
+                psmt.setInt(2,m.getId());
+                //Paso 4: Ejecutar la sentencia
+                psmt.executeUpdate();                
+            }          
+        } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        }
+        finally{
+            try { if (psmt!= null) psmt.close();} 
+                    catch (Exception e){e.printStackTrace();};
+            try { if (conn!= null) conn.close();} 
+                    catch (Exception e){e.printStackTrace();};
+        }       
+    }    
 }

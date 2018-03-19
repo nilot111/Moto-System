@@ -26,6 +26,7 @@ public class Venta {
     private String seguro; // No , 1 año, 2 años , 3 años
     private boolean techoLona; 
     private boolean soat;
+    private IngresoMoto ingreso;
     public Venta(){
         
     }
@@ -175,5 +176,19 @@ public class Venta {
      */
     public void setSoat(boolean soat) {
         this.soat = soat;
+    }
+
+    /**
+     * @return the ingreso
+     */
+    public IngresoMoto getIngreso() {
+        return ingreso;
+    }
+
+    /**
+     * @param ingreso the ingreso to set
+     */
+    public void setIngreso(IngresoMoto ingreso) {
+        this.ingreso = ingreso;
     }
 }
