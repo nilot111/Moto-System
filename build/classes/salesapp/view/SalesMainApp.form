@@ -246,6 +246,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tableClientes">
+                  <Properties>
+                    <Property name="autoResizeMode" type="int" value="0"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -294,67 +297,67 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jScrollPane2" alignment="1" pref="591" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                              <Component id="textModel" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="textProd" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bDelMoto" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                      <Component id="textModel" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+                                      <Component id="bUpdMoto" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="72" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="textProd" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="bDelMoto" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
-                                              <Component id="bUpdMoto" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="72" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="comboTipo" max="32767" attributes="0"/>
-                                                  <Component id="textColor" pref="277" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="comboTipo" max="32767" attributes="0"/>
+                                          <Component id="textColor" pref="277" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="textPrecContado" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                                          <Component id="textPrecLista" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
-                                          <Component id="textStock" min="-2" pref="103" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="bAddMoto" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="textPrecContado" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <Component id="textPrecLista" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                                  <Component id="textStock" min="-2" pref="103" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="bAddMoto" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="481" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -404,9 +407,9 @@
                           <Component id="bDelMoto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bUpdMoto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="346" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -465,6 +468,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tableMotos">
+                  <Properties>
+                    <Property name="autoResizeMode" type="int" value="0"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -864,6 +870,9 @@
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="table_clientes">
+                      <Properties>
+                        <Property name="autoResizeMode" type="int" value="0"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -974,6 +983,9 @@
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="table_motos">
+                      <Properties>
+                        <Property name="autoResizeMode" type="int" value="0"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1026,11 +1038,13 @@
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jXDatePicker1" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="fechaInicio" min="-2" pref="111" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jXDatePicker2" min="-2" pref="111" max="-2" attributes="0"/>
+                              <Component id="fechaFin" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace pref="25" max="32767" attributes="0"/>
@@ -1047,13 +1061,14 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXDatePicker1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fechaInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jXDatePicker2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="fechaFin" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="456" max="-2" attributes="0"/>
-                      <EmptySpace pref="63" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1064,14 +1079,14 @@
                 <Property name="text" type="java.lang.String" value="Fecha inicio:"/>
               </Properties>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker1">
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="fechaInicio">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel30">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha fin:"/>
               </Properties>
             </Component>
-            <Component class="org.jdesktop.swingx.JXDatePicker" name="jXDatePicker2">
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="fechaFin">
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane5">
               <AuxValues>
@@ -1081,9 +1096,20 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTable" name="table_ventas">
+                  <Properties>
+                    <Property name="autoResizeMode" type="int" value="0"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Filtrar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -1330,6 +1356,9 @@
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="table_motosI">
+                      <Properties>
+                        <Property name="autoResizeMode" type="int" value="0"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1392,6 +1421,9 @@
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tableIngresos">
+                  <Properties>
+                    <Property name="autoResizeMode" type="int" value="0"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

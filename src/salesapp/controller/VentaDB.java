@@ -111,4 +111,54 @@ public class VentaDB {
         return arr;        
     }
     
+    public static ArrayList<Venta> queryDateRanges(Date fechaIni, Date fechaFin){
+        Connection conn=null;
+        PreparedStatement psmt=null;
+        ResultSet rs=null;
+        ArrayList<Venta> arr= new ArrayList<>();
+        try {
+            //Paso 1: Obtener la conexión
+            conn=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb",
+                    "root","root");
+            if(conn!=null){
+                String sql =null;
+                //Paso 2: Preparar la sentencia
+                if(fechaIni == null && fechaFin==null) sql="SELECT * FROM ventas";
+                else if(fechaIni != null && fechaFin == null) sql= "SELECT * FROM ventas WHERE fecha >= '"+fechaIni+"'";
+                else if(fechaFin!=null && fechaIni==null) sql= "SELECT * FROM ventas WHERE fecha <= '"+fechaFin+"'";
+                else sql = "SELECT * FROM ventas WHERE fecha between '"+fechaIni+"' and '"+fechaFin+"'";
+                //System.out.println(sql);
+                psmt = (PreparedStatement) conn.prepareStatement(sql);
+                //Paso 3: Ejecutar la sentencia
+                rs = psmt.executeQuery();
+                //Paso 4(opc.): Procesar los resultados
+                while (rs.next()){
+                    Venta v = new Venta();
+                    v.setId(rs.getInt("id"));
+                    v.setFecha(rs.getDate("fecha"));
+                    v.setTipoVenta(rs.getString("tipoVenta"));
+                    v.setMedioPago(rs.getString("medioDePago"));
+                    v.setSeguro(rs.getString("seguro"));
+                    v.setTechoLona(rs.getBoolean("techoLona"));
+                    v.setSoat(rs.getBoolean("soat"));
+                    v.setCliente(ClienteDB.queryByid(rs.getInt("idCliente")));
+                    v.setMoto(MotoDB.queryById(rs.getInt("idMoto")));
+                    v.setMonto(rs.getDouble("monto"));
+                    v.setIngreso(IngresoDB.queryByid(rs.getInt("idIngreso")));
+                    arr.add(v);
+                }                
+            }
+            
+        } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        }
+        finally{
+            try { if (psmt!= null) psmt.close();} 
+                    catch (Exception e){e.printStackTrace();};
+            try { if (conn!= null) conn.close();} 
+                    catch (Exception e){e.printStackTrace();};
+        }        
+        return arr;        
+    }   
 }
