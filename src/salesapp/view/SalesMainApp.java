@@ -6,15 +6,26 @@
 package salesapp.view;
 
 
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -1153,12 +1164,13 @@ public class SalesMainApp extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modeloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtcodigoI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modeloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel35)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modeloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(modeloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel34)
-                            .addComponent(txtproductoI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtproductoI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(modeloPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel35))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1491,6 +1503,14 @@ public class SalesMainApp extends javax.swing.JFrame {
         VentaDB.add(venta);
         MotoDB.vender(m); //actualizamos stock
         
+        //GENERAR PDF
+        try {
+            generarCartaPoder(venta);
+            generarClausula(venta);
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(SalesMainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         JOptionPane.showMessageDialog(jVenta, "Se realizó con éxito la venta","Venta Confirmada",
                 JOptionPane.OK_OPTION);
         
@@ -1500,6 +1520,112 @@ public class SalesMainApp extends javax.swing.JFrame {
         limpiarFormVenta();
     }//GEN-LAST:event_btnGenerarVentaActionPerformed
 
+    private void generarCartaPoder(Venta v) throws DocumentException, FileNotFoundException{
+        Moto m=v.getMoto();
+        IngresoMoto i=v.getIngreso();
+        Cliente cliente=v.getCliente();
+        Document doc= new Document();
+        Calendar cal = Calendar.getInstance();
+        int day=cal.get(Calendar.DAY_OF_MONTH);
+        String month=cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        int year=cal.get(Calendar.YEAR);
+        
+        String fechatxt=""+day+" de "+month+" del "+year;
+        
+        // POR CONVENCION CARTA= Carta-apellido-nombres
+        PdfWriter.getInstance(doc, new FileOutputStream("CartaPoder-"+cliente.getApellidoPat()
+                +"-"+cliente.getNombres()+".pdf"));
+        doc.open();
+        
+        Font fuente= new Font();
+        fuente.setSize(11);
+
+        doc.add(new Paragraph("AAP\n"
+                + "ASOCIACIÓN AUTOMOTRIZ DEL PERÚ\n"
+                + "          FUNDADA EN 1926\n\n",fuente));
+        doc.add(new Paragraph(fechatxt+"\n\n")); // fecha
+        
+        doc.add(new Paragraph("Señores\n"
+                + "ASOCIACIÓN AUTOMOTRIZ DEL PERÚ\n",fuente));
+        
+        Chunk c= new Chunk("Presente.-",fuente);
+        c.setUnderline(0.1f, -2f);
+        doc.add(c);
+        Paragraph justified = new Paragraph("\nDe conformidad con lo establecido en el numeral 115.1 del Art. 115° de lo Ley del Procedimiento " +
+                        "Administrativo General, Ley N° 27444, tengo a bien dirigirme a ustedes con el objeto de conferir " +
+                        "poder general para que, en representación de mi persona, acciones y derechos, las personas que " +
+                        "a continuación se mencionan, en su calidad de gestores acreditados para trámites de la Empresa " +
+                        "Red Motos SAC con R.U.C: 20557320866 concesionaria de la marca BAJAJ puedan, " +
+                        "indistintamente cualquiera de ellos, apersonarse a sus oficinas con el objeto de Recoger la placa única nacional de rodaje " +
+                        "que corresponde al vehículo de mi propiedad:\n\n",fuente);
+        justified.setAlignment(Element.ALIGN_JUSTIFIED);
+        doc.add(justified);
+        
+        doc.add(new Paragraph("Marca:    BAJAJ\n"
+                            + "Tipo:     "+m.getTipo()+"\n"
+                            + "Modelo:   "+m.getProducto()+" "+m.getModelo()+"\n"
+                            + "Color:    "+m.getColor()+"\n"
+                            + "Chasis:   "+i.getChasis()+"\n"
+                            + "Motor:    "+i.getMotor()+"\n\n",fuente));
+        
+        doc.add(new Paragraph("Así como suscribir la constancia y/o formulario de recepción correspondiente\n"
+                + "Los apoderados designados mediante la presente carta son los siguientes:\n\n"
+                + "Nombres y apellidos:                                         No Doc.Identidad\n\n"
+                + "ROSARIO ZORRILLA VILLAVERDE                  09564458\n"
+                + "JORGE MANUEL VARGAS CERRILLO             10530117\n"
+                + "LUIS VARGAS HERNANDEZ                             08532339\n\n",fuente));
+        
+        doc.add(new Paragraph("En consecuencia, agradeciéndoles por la atención prestada al presente otorgamiento de " +
+                "facultades, quedo de ustedes.\n\n" +
+                "Atentamente,\n" +
+                "\n" +
+                "Firma                         : ...........................\n" +
+                "Nombres y apellidos : "+cliente.getNombres()+" "+cliente.getApellidoPat()+" "+cliente.getApellidoMat()+"\n" +
+                "DNI                            : "+cliente.getDni(),fuente));
+        doc.close();
+    }
+    
+    private void generarClausula(Venta v) throws DocumentException, FileNotFoundException{
+        
+        Cliente cliente=v.getCliente();
+        //format fecha
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Document doc= new Document();
+        PdfWriter.getInstance(doc, new FileOutputStream("clausula-"+cliente.getApellidoPat()+"-"+
+                cliente.getNombres()+".pdf"));
+        doc.open();
+        
+        Font fuente= new Font(Font.FontFamily.TIMES_ROMAN, 13);
+        
+        Font boldF = new Font(Font.FontFamily.TIMES_ROMAN, 13, Font.BOLD);
+        Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD|Font.UNDERLINE);
+        Paragraph title= new Paragraph("CLAUSULA ADICIONAL",boldFont);
+        title.setAlignment(Element.ALIGN_CENTER);
+        doc.add(title);
+        
+        
+        doc.add(new Paragraph("\nRED MOTOS SAC con RUC 20557320866 representado por ROSARIO ZORRILLA VILLAVERDE " +
+                                "identificado con DNI 09564458 quien en adelante se denominará el VENDEDOR y\n",fuente));
+        doc.add(new Paragraph("Nombre : "+cliente.getNombres()+" "+cliente.getApellidoPat()+" "+cliente.getApellidoMat()+"\n\n" +
+                "DNI       : "+cliente.getDni()+"\n\n" +
+                "A quien en adelante se denominará el \"COMPRADOR\", ambos manifiestan lo siguiente.\n\n" +
+                "Se realizó compra-venta de un vehículo automotor menor según comprobante de pago:\n\n" +
+                v.getTipoVenta().toUpperCase()+" :     001-000523\n" +
+                "FECHA  :      "+df.format(v.getFecha())+"\n" +
+                "MONTO :      S/. "+v.getMonto()+"\n\n",fuente));
+        Chunk medio= new Chunk("MEDIO DE PAGO:\n\n",boldF);
+        doc.add(medio);
+        
+        doc.add(new Paragraph("CANCELACION EN "+v.getMedioPago().toUpperCase()+"\n" +
+                            "MONTO ENTREGADO A RED MOTOS SAC S/. "+v.getMonto()+"\n" +
+                            "FECHA DE PAGO: "+df.format(v.getFecha())+"\n" +
+                            "\n" +
+                            "Asimismo, hacemos presente que la "+v.getTipoVenta()+" en mención está completamente cancelada.\n" +
+                            "Sin otro particular,",fuente));
+        doc.close();        
+    }
+    
     private void txtdniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdniKeyReleased
         // TODO add your handling code here:
         String filterdni=txtdni.getText();
